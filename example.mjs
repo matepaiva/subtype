@@ -1,8 +1,21 @@
-import subtype, { types } from '../subtype';
+import subtype, { types, letBeFree, notNullable } from '../subtype';
 
-console.log(subtype);
-console.log(types);
-// import subtype, { notNullable, types, letBeFree, oneOf } from '../subtype';
+const example = { a: notNullable(1), c: types.string }
+const typedExample = subtype(example)
+
+typedExample.b = letBeFree(true);
+typedExample.b = 3;
+// typedExample.c = 'works';
+// typedExample.c = 'works';
+
+console.log(typedExample);
+// typedExample.a = false
+
+// console.log(subtype);
+// console.log(letBeFree);
+// console.log(oneOf);
+// console.log(notNullable);
+// console.log(types);
 
 // const obj = {
 //     // will initialize with key a1 having value 1. It will alolow only numbers and nullable values.
