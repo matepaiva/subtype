@@ -1,28 +1,26 @@
-import * as symbols from './symbols';
+import { number, string, boolean, array, object, func, undef, nll } from './symbols';
 
-export const number = symbols.number;
-export const string = symbols.string;
-export const boolean = symbols.boolean;
-export const array = symbols.array;
-export const object = symbols.object;
-export const func = symbols.func;
-export const undef = symbols.undef;
-export const nll = symbols.nll;
+const _types = [number, string, boolean, array, object, func, undef, nll];
 
-export const getTypeFromValue = (value) => {
-  const _value = symbols.hasSymbols(value) ? value.value : value
-  const type = Array.isArray(_value) ? 'array' : typeof _value;
-  if (type === 'symbol') {
-    return _value;
-  } else {
-    return {
-      'number': symbols.number,
-      'string': symbols.string,
-      'boolean': symbols.boolean,
-      'array': symbols.array,
-      'object': symbols.object,
-      'function': symbols.func,
-      'undefined': symbols.undef,
-    }[type]
-  }
-}
+export const mappedTypesToSymbols = {
+  'number': number,
+  'string': string,
+  'boolean': boolean,
+  'array': array,
+  'object': object,
+  'function': func,
+  'undefined': undef,
+};
+
+export default { number, string, boolean, array, object, func, undef, nll };
+
+export const isType = (value) =>
+  Array.isArray(value)
+    ? value.some((item) => _types.includes(item))
+    : _types.includes(value);
+
+export const inferType = (value) => (isType(value))
+  ? value
+  : mappedTypesToSymbols[
+    Array.isArray(value) ? 'array' : typeof value
+  ];

@@ -1,13 +1,8 @@
-import { createSchema } from './schema';
 import * as traps from './traps';
-import { stripSymbols } from './symbols';
 
-export default function createHandler (obj) {
+export default function createHandler (schema) {
   const initialHandler = {};
-  const schema = createSchema(obj);
-
-  stripSymbols(obj);
-
+  
   return Object
     .keys(traps)
     .reduce((handler, key) => (

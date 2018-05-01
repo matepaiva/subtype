@@ -1,8 +1,7 @@
-import subtype from './subtype'
-import oneOf from './oneOf'
-import { letBeFree, notNullable } from './modifiers'
+import subtype from './subtype';
+import { letBeFree, notNullable } from './keySchema';
 
-import * as types from './types'
+import types from './types';
 
 export default subtype;
 
